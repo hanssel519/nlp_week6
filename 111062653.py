@@ -1,5 +1,6 @@
 import re
 from collections import Counter
+from typing import final
 import streamlit as st
 
 def words(text): return re.findall(r'\w+', text.lower())
@@ -45,24 +46,26 @@ def verify(w):
         st.markdown(f'<p style="background-color:#3CB371;font-size:24px;border-radius:2%;">{correction(w)}</p>', unsafe_allow_html=True)
 
 
-selected_word = st.selectbox('choose a word or ...', ['','apple', 'lamon', 'speling', 'hapy', 'language', 'greay'])
-typed_word = st.text_input('type your own!!!')
+select_word = st.selectbox('choose a word or ...', ['','apple', 'lamon', 'speling', 'hapy', 'language', 'greay'])
+text_input = st.text_input('type your own!!!')
+
 
 check_shown = st.sidebar.checkbox('Show the original word')
 
 if check_shown:
-    st.text('Original word: ')
-    if selected_word:
-        st.text(selected_word)
-    if typed_word:
-        st.text(typed_word)
+    if select_word:
+        st.text('Original word: ')
+        st.text(select_word)
+    elif text_input:
+        st.text('Original word: ')
+        st.text(text_input)
 
 
 
 
-if selected_word:
-    w = selected_word
-    verify(selected_word)
-if typed_word:
-    w = typed_word
-    verify(typed_word)
+if text_input:
+    #w = selected_word
+    verify(text_input)
+elif select_word:
+    verify(select_word)
+
