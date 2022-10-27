@@ -52,7 +52,10 @@ check_shown = st.sidebar.checkbox('Show the original word')
 
 if check_shown:
     st.text('Original word: ')
-    st.text(typed_word)
+    if selected_word:
+        st.text(selected_word)
+    if typed_word:
+        st.text(typed_word)
 
 
 
